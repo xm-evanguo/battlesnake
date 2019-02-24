@@ -2,6 +2,7 @@ import json
 import os
 import random
 import bottle
+import numpy as np
 
 from api import ping_response, start_response, move_response, end_response
 
@@ -55,8 +56,35 @@ def move():
             snake AI must choose a direction to move in.
     """
     print(json.dumps(data))
-
+    map_height = data["board"]["height"]
+    map_width = data["board"]["width"]
+    map = np.zeros((map_height, map_width), dtype = int)
     directions = ['up', 'down', 'left', 'right']
+
+    for head in data["you"]["body"][:1]:
+        map[head["y"]][head["x"]] = 3
+        head_x = head["x"]
+        head_y = head["y"]
+
+    for body in data["you"]["body"]:
+        if np.equal(map[body["y"]][body["x"]], 0):
+            map[body["y"]][body["x"]] = 2
+
+    for food in data["board"]["food"]:
+        map[food["y"]][food["x"]] = 1
+
+    print(map)
+
+    if head_x is 0:
+        directions.remove('left')
+    elif head_x is map_width - 1:
+        directions.remove('right')
+
+    if head_y is 0:
+        directions.remove('up')
+    elif head_y is map_height - 1:
+        directions.remove('down')
+ 
     direction = random.choice(directions)
 
     return move_response(direction)
