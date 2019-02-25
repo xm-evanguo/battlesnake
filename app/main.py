@@ -55,7 +55,7 @@ def move():
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
     """
-    print(json.dumps(data))
+    #print(json.dumps(data))
     map_height = data["board"]["height"]
     map_width = data["board"]["width"]
     map = np.zeros((map_height, map_width), dtype = int)
@@ -63,8 +63,7 @@ def move():
 
     for head in data["you"]["body"][:1]:
         map[head["y"]][head["x"]] = 3
-        head_x = head["x"]
-        head_y = head["y"]
+        head_xy = (head["x"], head["y"])
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):
@@ -75,20 +74,33 @@ def move():
 
     print(map)
 
-    if head_x is 0:
+    if head_xy[0] is 0:
         directions.remove('left')
-    elif head_x is map_width - 1:
+    elif head_xy[0] is map_width - 1:
         directions.remove('right')
 
-    if head_y is 0:
+    if head_xy[1] is 0:
         directions.remove('up')
-    elif head_y is map_height - 1:
+    elif head_xy[1] is map_height - 1:
         directions.remove('down')
- 
+
     direction = random.choice(directions)
 
+    while(next_move(map, head_xy, direction) > 1):
+        directions.remove(direction)
+        direction = random.choice(directions)
+
+    print(direction)
     return move_response(direction)
 
+def next_move(map, head_xy, direction):
+    switcher = {
+        'left': (-1, 0),
+        'right': (1, 0),
+        'up': (0, -1),
+        'down': (0, 1)
+    }
+    return map[head_xy[1] + switcher.get(direction)[1]][head_xy[0] + switcher.get(direction)[0]]
 
 @bottle.post('/end')
 def end():
