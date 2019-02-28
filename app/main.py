@@ -3,6 +3,7 @@ import os
 import random
 import bottle
 import numpy as np
+import nextmove
 
 from api import ping_response, start_response, move_response, end_response
 
@@ -69,11 +70,15 @@ def move():
         if np.equal(map[body["y"]][body["x"]], 0):
             map[body["y"]][body["x"]] = 2
 
+    foods = []
     for food in data["board"]["food"]:
         map[food["y"]][food["x"]] = 1
+        foods.append((food["x"], food["y"]))
 
     print(map)
-
+    path = nextmove.shortest_path(map, head_xy, foods[0])
+    print(path)
+    '''
     if head_xy[0] is 0:
         directions.remove('left')
     elif head_xy[0] is map_width - 1:
@@ -86,21 +91,13 @@ def move():
 
     direction = random.choice(directions)
 
-    while(next_move(map, head_xy, direction) > 1):
+    while(next_move_state(map, head_xy, direction) > 1):
         directions.remove(direction)
         direction = random.choice(directions)
-
+    '''
+    direction = nextmove.next_direction(map, head_xy, path[1])
     print(direction)
     return move_response(direction)
-
-def next_move(map, head_xy, direction):
-    switcher = {
-        'left': (-1, 0),
-        'right': (1, 0),
-        'up': (0, -1),
-        'down': (0, 1)
-    }
-    return map[head_xy[1] + switcher.get(direction)[1]][head_xy[0] + switcher.get(direction)[0]]
 
 @bottle.post('/end')
 def end():
