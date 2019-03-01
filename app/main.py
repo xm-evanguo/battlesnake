@@ -4,6 +4,7 @@ import random
 import bottle
 import numpy as np
 import nextmove
+import help
 
 from api import ping_response, start_response, move_response, end_response
 
@@ -97,6 +98,8 @@ def move():
     '''
     direction = nextmove.next_direction(map, head_xy, path[1])
     print(direction)
+    bestMove = help.bestMove(map, head_xy, direction, map_height, map_width)
+    print(bestMove)
     return move_response(direction)
 
 @bottle.post('/end')
