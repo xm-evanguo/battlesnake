@@ -5,6 +5,7 @@ import bottle
 import numpy as np
 import nextmove
 import help
+import othersnake
 
 from api import ping_response, start_response, move_response, end_response
 
@@ -80,7 +81,8 @@ def move():
 
     print(map)
     for food in foods:
-        if path = nextmove.shortest_path(map, head_xy, food) is not None:
+        path = nextmove.shortest_path(map, head_xy, food)
+        if path is not None:
             break
 
     print(path)
@@ -89,7 +91,13 @@ def move():
     print(direction)
     bestMove = help.bestMove(map, head_xy, direction, map_height, map_width)
     print(bestMove)
-    return move_response(direction)
+    #snakes = othersnake.snakes_head(data, map)
+    #nearFood = findNearFood(foods, map, head_xy, snakes)
+    #print(nearFood)
+    if data["you"]["health"] > 60:
+        return move_response(bestMove)
+    else:
+        return move_response(direction)
 
 @bottle.post('/end')
 def end():

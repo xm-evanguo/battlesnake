@@ -1,48 +1,48 @@
 def bestMove(map, head_xy, direction, map_height, map_width):
     # 1.no wall, 2.more space, 3.near food
-    index = [0,0,0,0]
+    index = [[0,'up'],[0,'down'],[0,'left'],[0,'right']]
     x = head_xy[0]
     y = head_xy[1]
     print(x,y, map_height,map_width)
 
     for i in range(y-1, -1, -1): #check up
         if map[i][x] < 2:
-            index[0] += 1
+            index[0][0] += 1
         else:
             break
     for i in range(y+1, map_height): #check down
         if map[i][x] < 2:
-            index[1] += 1
+            index[1][0] += 1
         else:
             break
     for i in range(x-1, -1, -1): #check left
         if map[y][i] < 2:
-            index[2] += 1
+            index[2][0] += 1
         else:
             break
     for i in range(x+1, map_width): #check right
         if map[y][i] < 2:
-            index[3] += 1
+            index[3][0] += 1
         else:
             break
 
-    if map[y-1][x-1] >= 2:
-        index[0] -= 1
-        index[2] -= 1
+    if y < map_height and x < map_width and map[y-1][x-1] >= 2:
+        index[0][0] -= 1
+        index[2][0] -= 1
 
-    if map[y-1][x+1] >= 2:
-        index[0] -= 1
-        index[3] -= 1
+    if y < map_height and x+1 < map_width and map[y-1][x+1] >= 2:
+        index[0][0] -= 1
+        index[3][0] -= 1
 
-    if map[y+1][x-1] >= 2:
-        index[1] -= 1
-        index[2] -= 1
+    if y+1 < map_height and x < map_width and map[y+1][x-1] >= 2:
+        index[1][0] -= 1
+        index[2][0] -= 1
 
-    if map[y+1][x+1] >= 2:
-        index[1] -= 1
-        index[3] -= 1
+    if y+1 < map_height and x+1 < map_width and map[y+1][x+1] >= 2:
+        index[1][0] -= 1
+        index[3][0] -= 1
 
-    return index
+    return max(index)[1]
 
 
 def findNearFood(foods, map, head_xy, snakes):
