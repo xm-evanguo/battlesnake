@@ -61,10 +61,12 @@ def move():
     map_width = data["board"]["width"]
     map = np.zeros((map_height, map_width), dtype = int)
     directions = ['up', 'down', 'left', 'right']
+    my_id = data["you"]["id"]
 
-    for head in data["you"]["body"][:1]:
-        map[head["y"]][head["x"]] = 3
-        head_xy = (head["x"], head["y"])
+    head_x = data["you"]["body"][0]["x"]
+    head_y = data["you"]["body"][0]["y"]
+    map[head_y][head_x] = 3
+    head_xy = (head_x, head_y)
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):
@@ -76,25 +78,12 @@ def move():
         foods.append((food["x"], food["y"]))
 
     print(map)
-    path = nextmove.shortest_path(map, head_xy, foods[0])
+    for food in foods:
+        if path = nextmove.shortest_path(map, head_xy, food) is not None:
+            break
+
     print(path)
-    '''
-    if head_xy[0] is 0:
-        directions.remove('left')
-    elif head_xy[0] is map_width - 1:
-        directions.remove('right')
 
-    if head_xy[1] is 0:
-        directions.remove('up')
-    elif head_xy[1] is map_height - 1:
-        directions.remove('down')
-
-    direction = random.choice(directions)
-
-    while(next_move_state(map, head_xy, direction) > 1):
-        directions.remove(direction)
-        direction = random.choice(directions)
-    '''
     direction = nextmove.next_direction(map, head_xy, path[1])
     print(direction)
     return move_response(direction)

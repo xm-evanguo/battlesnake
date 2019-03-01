@@ -30,3 +30,21 @@ def shortest_path(map, head_xy, goal):
             if 0 <= x2 < len(map) and 0 <= y2 < len(map) and map[y2][x2] < 2 and (x2,y2) not in seen:
                 queue.append(path + [(x2,y2)])
                 seen.add((x2,y2))
+
+def random_move(map, head_xy):
+    directions = ['left', 'right', 'up', 'down']
+    if head_xy[0] is 0:
+        directions.remove('left')
+    elif head_xy[0] is map_width - 1:
+        directions.remove('right')
+
+    if head_xy[1] is 0:
+        directions.remove('up')
+    elif head_xy[1] is map_height - 1:
+        directions.remove('down')
+
+    for direction in directions:
+        if next_move_state(map, head_xy, direction) > 1 and len(directions) > 1:
+            directions.remove(direction)
+
+    return random.choice(directions)

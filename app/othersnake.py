@@ -1,8 +1,20 @@
-def snakes_head(data, map):
-    snakes_info = []
+def snakes_length(data, map):
+    snakes_length = []
     for snakes in data["snakes"][1:]:
-        snakes_info.append((len(snakes["body"]), snakes["body"][0]["x"], snakes["body"][0]["y"]))
-    return snakes_info
+        snake_length.append(len(snakes["body"]))
+    return snakes_length
+
+def snakes_head(data, map):
+    snakes_body = []
+    for snakes in data["snakes"][1:]:
+        snakes_body.append((snakes["body"][0]["x"], snakes["body"][0]["y"]))
+    return snakes_body
+
+def snakes_tail(data, map):
+    snakes_tail = []
+    for snakes in data["snakes"][1:]:
+        snakes_tail.append((snakes["body"][len(snakes["body"]) - 1]["x"], snakes["body"][len(snakes["body"]) - 1]["y"]))
+    return snakes_tail
 
 def map_simulation(map, my_length, snakes_info):
     simulation_map = map
