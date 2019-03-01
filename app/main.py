@@ -74,26 +74,43 @@ def move():
         if np.equal(map[body["y"]][body["x"]], 0):
             map[body["y"]][body["x"]] = 2
 
+    if len(data["board"]["snakes"]) > 0:
+        for item in data["board"]["snakes"]:
+            x = item["body"][0]["x"]
+            y = item["body"][0]["y"]
+            map[y][x] = 3
+
+        for item in data["board"]["snakes"]:
+            for body in item["body"]:
+                if np.equal(map[body["y"]][body["x"]], 0):
+                    map[body["y"]][body["x"]] = 2
+
     foods = []
     for food in data["board"]["food"]:
         map[food["y"]][food["x"]] = 1
         foods.append((food["x"], food["y"]))
 
     print(map)
+    """
     for food in foods:
         path = nextmove.shortest_path(map, head_xy, food)
         if path is not None:
             break
+    """
 
+    snakes = othersnake.snakes_head(data, map)
+    nearFood = help.findNearFood(foods, map, head_xy, snakes)
+    print(nearFood)
+
+    path = nextmove.shortest_path(map, head_xy, nearFood)
     print(path)
 
     direction = nextmove.next_direction(map, head_xy, path[1])
     print(direction)
+
     bestMove = help.bestMove(map, head_xy, direction, map_height, map_width)
     print(bestMove)
-    #snakes = othersnake.snakes_head(data, map)
-    #nearFood = findNearFood(foods, map, head_xy, snakes)
-    #print(nearFood)
+
     if data["you"]["health"] > 60:
         return move_response(bestMove)
     else:
