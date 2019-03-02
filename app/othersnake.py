@@ -46,6 +46,7 @@ def map_simulation(data, map, my_length, my_id):
 def simu_map(map, my_length, length_list, head_list, tail_list, n_snakes):
     simulation_map = map
     for i in range(n_snakes-1):
+        print("cur snake: ", i, head_list[i])
         x = head_list[i][0]
         y = head_list[i][1]
         if length_list[i] >= my_length:
