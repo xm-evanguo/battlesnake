@@ -49,16 +49,10 @@ def start():
 
     return start_response(color)
 
-
 @bottle.post('/move')
 def move():
     data = bottle.request.json
 
-    """
-    TODO: Using the data from the endpoint request object, your
-            snake AI must choose a direction to move in.
-    """
-    #print(json.dumps(data))
     map_height = data["board"]["height"]
     map_width = data["board"]["width"]
     map = np.zeros((map_height, map_width), dtype = int)
