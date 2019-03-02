@@ -98,7 +98,7 @@ def move():
 
     snakes_head_list = othersnake.snakes_head(data, simu_map, my_id)
     nearFood = help.findNearFood(foods, simu_map, head_xy, snakes_head_list)
-    print(nearFood)
+    print("near food is : ", nearFood)
 
     path = nextmove.shortest_path(simu_map, head_xy, nearFood)
     print("path is ", path)
@@ -110,7 +110,7 @@ def move():
                 break
 
     if path is None:
-        return move_response(nextmove.random_move(simu_map, head_xy))
+        return move_response(help.bestMove(simu_map, head_xy, direction, map_height, map_width))
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
     print("direction is ", direction)
 
