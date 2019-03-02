@@ -69,6 +69,7 @@ def move():
     head_y = data["you"]["body"][0]["y"]
     map[head_y][head_x] = 3
     head_xy = (head_x, head_y)
+    my_length = len(data["you"]["body"])
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):
@@ -98,17 +99,30 @@ def move():
             break
     """
 
+<<<<<<< HEAD
     snakes = othersnake.snakes_head(data, map)
     nearFood = detector.findNearFood(foods, map, head_xy, snakes)
+=======
+    simu_map = othersnake.map_simulation(data, map, my_length)
+
+    print(simu_map)
+
+    snakes = othersnake.snakes_head(data, simu_map)
+    nearFood = help.findNearFood(foods, simu_map, head_xy, snakes)
+>>>>>>> ce1bb1fe5625287581befbf63205526358e33ad4
     print(nearFood)
 
-    path = nextmove.shortest_path(map, head_xy, nearFood)
+    path = nextmove.shortest_path(simu_map, head_xy, nearFood)
     print(path)
 
-    direction = nextmove.next_direction(map, head_xy, path[1])
+    direction = nextmove.next_direction(simu_map, head_xy, path[1])
     print(direction)
 
+<<<<<<< HEAD
     bestMove = detector.bestMove(map, head_xy, map_height, map_width)
+=======
+    bestMove = help.bestMove(simu_map, head_xy, direction, map_height, map_width)
+>>>>>>> ce1bb1fe5625287581befbf63205526358e33ad4
     print(bestMove)
 
     if data["you"]["health"] > 60:
