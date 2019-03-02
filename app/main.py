@@ -96,7 +96,7 @@ def move():
 
     print(simu_map)
 
-    snakes_head_list = othersnake.snakes_head(data, simu_map)
+    snakes_head_list = othersnake.snakes_head(data, simu_map, my_id)
     nearFood = help.findNearFood(foods, simu_map, head_xy, snakes_head_list)
     print(nearFood)
 
