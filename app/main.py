@@ -91,30 +91,27 @@ def move():
         map[food["y"]][food["x"]] = 1
         foods.append((food["x"], food["y"]))
 
-    print(map)
-    """
-    for food in foods:
-        path = nextmove.shortest_path(map, head_xy, food)
-        if path is not None:
-            break
-    """
-
     simu_map = othersnake.map_simulation(data, map, my_length)
 
     print(simu_map)
 
-    snakes = othersnake.snakes_head(data, simu_map)
-    nearFood = help.findNearFood(foods, simu_map, head_xy, snakes)
+    snakes_head_list = othersnake.snakes_head(data, simu_map)
+    nearFood = help.findNearFood(foods, simu_map, head_xy, snakes_head_list)
     print(nearFood)
 
     path = nextmove.shortest_path(simu_map, head_xy, nearFood)
-    print(path)
+    print("path is ", path)
 
+    if path is None:
+        tmp_int = 0
+        while path is None:
+            path = nextmove.shortest_path(simu_map, head_xy, foods[tmp_int])
+            tmp_int += 1
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
-    print(direction)
+    print("direction is ", direction)
 
     bestMove = help.bestMove(simu_map, head_xy, direction, map_height, map_width)
-    print(bestMove)
+    print("bestmove is ", bestMove)
 
     if data["you"]["health"] > 60:
         return move_response(bestMove)
