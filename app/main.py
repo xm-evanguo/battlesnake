@@ -88,7 +88,7 @@ def move():
         x = body["x"]
         if np.equal(map[y][x], 0):
             map[y][x] = 2
-            if (x,y) == othersnake.next_tail():
+            if (x,y) == othersnake.next_tail(data):
                 break;
 
     if len(data["board"]["snakes"]) > 0:
