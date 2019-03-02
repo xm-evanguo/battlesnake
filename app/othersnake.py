@@ -25,9 +25,9 @@ def snakes_num(data):
     return len(data["board"]["snakes"])
 
 def map_simulation(data, map, my_length, my_id):
-    length_list = snakes_length(data, map)
-    head_list = snakes_head(data, map)
-    tail_list = snakes_tail(data, map)
+    length_list = snakes_length(data, map, my_id)
+    head_list = snakes_head(data, map, my_id)
+    tail_list = snakes_tail(data, map, my_id)
     n_snakes = snakes_num(data)
     return simu_map(map, my_length, length_list, head_list, tail_list, n_snakes)
 
