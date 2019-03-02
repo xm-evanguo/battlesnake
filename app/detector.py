@@ -28,7 +28,6 @@ def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
         else:
             break
     for i in range(x-1, -1, -1): #check left
-        print(map[y][i], y, i)
         if map[y][i] < 2:
             index[2][0] += 1
         if map[y][i] == 1:
