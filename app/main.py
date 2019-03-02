@@ -114,7 +114,7 @@ def move():
     bestMove = detector.bestMove(simu_map, head_xy, map_height, map_width)
     print("bestmove is ", bestMove)
 
-    if data["you"]["health"] > 80:
+    if data["you"]["health"] > 90:
         return move_response(bestMove)
     else:
         return move_response(direction)
