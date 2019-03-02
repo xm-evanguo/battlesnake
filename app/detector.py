@@ -60,13 +60,13 @@ def bestMove(map, head_xy, map_height, map_width):
     if y < map_height and x < map_width and map[y-1][x] >= 2:
             index[0][0] -= 1000
 
-    if y < map_height+1 and x < map_width and map[y+1][x] >= 2:
+    if y+1 < map_height and x < map_width and map[y+1][x] >= 2:
             index[1][0] -= 1000
 
-    if y+1 < map_height and x < map_width and map[y][x-1] >= 2:
+    if y < map_height and x < map_width and map[y][x-1] >= 2:
             index[2][0] -= 1000
 
-    if y+1 < map_height and x+1 < map_width and map[y][x+1] >= 2:
+    if y < map_height and x+1 < map_width and map[y][x+1] >= 2:
             index[3][0] -= 1000
 
 
