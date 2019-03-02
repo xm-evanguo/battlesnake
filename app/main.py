@@ -52,6 +52,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    print(json.dumps(data))
 
     map_height = data["board"]["height"]
     map_width = data["board"]["width"]
