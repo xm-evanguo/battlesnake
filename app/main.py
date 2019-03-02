@@ -4,7 +4,7 @@ import random
 import bottle
 import numpy as np
 import nextmove
-import detector
+import help
 import othersnake
 
 from api import ping_response, start_response, move_response, end_response
@@ -70,6 +70,7 @@ def move():
     map[head_y][head_x] = 3
     head_xy = (head_x, head_y)
     my_length = len(data["you"]["body"])
+    my_id = data["you"]["id"]
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):
@@ -91,32 +92,32 @@ def move():
         map[food["y"]][food["x"]] = 1
         foods.append((food["x"], food["y"]))
 
-    print(map)
-    """
-    for food in foods:
-        path = nextmove.shortest_path(map, head_xy, food)
-        if path is not None:
-            break
-    """
-
-    simu_map = othersnake.map_simulation(data, map, my_length)
+    simu_map = othersnake.map_simulation(data, map, my_length, my_id)
 
     print(simu_map)
 
-    snakes = othersnake.snakes_head(data, simu_map)
-    nearFood = help.findNearFood(foods, simu_map, head_xy, snakes)
-    print(nearFood)
+    snakes_head_list = othersnake.snakes_head(data, simu_map, my_id)
+    nearFood = help.findNearFood(foods, simu_map, head_xy, snakes_head_list)
+    print("near food is : ", nearFood)
 
     path = nextmove.shortest_path(simu_map, head_xy, nearFood)
-    print(path)
+    print("path is ", path)
 
+    if path is None:
+        for food in foods:
+            path = nextmove.shortest_path(simu_map, head_xy, food)
+            if path is not None:
+                break
+
+    if path is None:
+        return move_response(nextmove.random_move(simu_map, head_xy))
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
-    print(direction)
+    print("direction is ", direction)
 
-    bestMove = help.bestMove(simu_map, head_xy, direction, map_height, map_width)
-    print(bestMove)
+    bestMove = help.bestMove(simu_map, head_xy, map_height, map_width)
+    print("bestmove is ", bestMove)
 
-    if data["you"]["health"] > 60:
+    if data["you"]["health"] > 80:
         return move_response(bestMove)
     else:
         return move_response(direction)
