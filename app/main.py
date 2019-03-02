@@ -140,14 +140,16 @@ def move():
     bestMove = detector.bestMove(data, simu_map, head_xy, my_next_tail, map_height, map_width)
     print("bestmove is ", bestMove)
 
-'''
+    print("return bestMove")
+    return move_response(bestMove)
+
+    '''
     if my_length < 15 or data["you"]["health"] < 40:
         if direction is not None:
             print("return direction")
             return move_response(direction)
-'''
-    print("return bestMove")
-    return move_response(bestMove)
+            '''
+
 
 @bottle.post('/end')
 def end():
