@@ -108,6 +108,10 @@ def move():
         print(bestMove)
         return move_response(bestMove)
 
+    for food in nearFood[1:]:
+        direction = nextmove.shortest_path(simu_map, head_xy, food)
+        if direction is not None:
+            break
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
     print("direction is ", direction)
 
@@ -115,10 +119,11 @@ def move():
     print("bestmove is ", bestMove)
 
     #if data["you"]["health"] < 80 or my_length < 10:
-    if my_length < 10:
-        return move_response(direction)
-    else:
-        return move_response(bestMove)
+    if my_length < 10 or data["you"]["health"] < 30:
+        if direction is not None:
+            return move_response(direction)
+
+    return move_response(bestMove)
 
 @bottle.post('/end')
 def end():
