@@ -68,7 +68,6 @@ def move():
     map = np.zeros((map_height, map_width), dtype = int)
     directions = ['up', 'down', 'left', 'right']
     my_id = data["you"]["id"]
-    print("my_id: ", my_id)
 
     head_x = data["you"]["body"][0]["x"]
     head_y = data["you"]["body"][0]["y"]
@@ -139,11 +138,11 @@ def move():
     bestMove = detector.bestMove(data, simu_map, head_xy, my_next_tail, map_height, map_width)
     print("bestmove is ", bestMove)
 
-    #if data["you"]["health"] < 80 or my_length < 10:
     if my_length < 15 or data["you"]["health"] < 40:
         if direction is not None:
+            print("return direction")
             return move_response(direction)
-
+    print("return bestMove")
     return move_response(bestMove)
 
 @bottle.post('/end')
