@@ -108,7 +108,9 @@ def move():
         print("path is ", path)
 
     if path is None:
-        return detector.bestMove(simu_map, head_xy, map_height, map_width)
+        bestMove = detector.bestMove(simu_map, head_xy, map_height, map_width)
+        print(bestMove)
+        return move_response(bestMove)
 
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
     print("direction is ", direction)
