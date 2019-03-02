@@ -1,6 +1,6 @@
 import nextmove
 
-def bestMove(map, head_xy, tail_xy, map_height, map_width):
+def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
     # 1.no wall, 2.more space, 3.near food
     index = [[0,'up'],[0,'down'],[0,'left'],[0,'right']]
     x = head_xy[0]
