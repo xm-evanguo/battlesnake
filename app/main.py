@@ -78,7 +78,7 @@ def move():
     tail_list = othersnake.snakes_tail(data, map, my_id)
 
     for tail in tail_list:
-        if map[tail[1]][tail[0]] == 8:
+        if np.equal(map[tail[1]][tail[0]], 8):
             map[tail[1]][tail[0]] = 9
         else:
             map[tail[1]][tail[0]] = 8
