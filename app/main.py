@@ -121,7 +121,7 @@ def move():
     print("bestmove is ", bestMove)
 
     #if data["you"]["health"] < 80 or my_length < 10:
-    if my_length < 10 or data["you"]["health"] < 30:
+    if my_length < 15 or data["you"]["health"] < 50:
         if direction is not None:
             return move_response(direction)
 
