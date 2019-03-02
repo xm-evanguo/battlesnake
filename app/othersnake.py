@@ -4,10 +4,12 @@ def next_tail(data):
     cur_body = data["you"]["body"][0]
     for body in data["you"]["body"][1:]:
         if body == cur_body:
-            return data["you"]["body"][len(data["you"]["body"]) - 1]
+            tail = (data["you"]["body"][len(data["you"]["body"]) - 1]["x"], data["you"]["body"][len(data["you"]["body"]) - 1]["y"])
+            return tail
         else:
             cur_body = body
-    return data["you"]["body"][len(data["you"]["body"]) - 2]
+    tail = (data["you"]["body"][len(data["you"]["body"]) - 2]["x"], data["you"]["body"][len(data["you"]["body"]) - 2]["y"])
+    return tail
 
 def snakes_length(data, map, my_id):
     length = []
