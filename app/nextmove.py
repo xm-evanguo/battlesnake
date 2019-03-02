@@ -35,12 +35,12 @@ def random_move(map, head_xy):
     directions = ['left', 'right', 'up', 'down']
     if head_xy[0] is 0:
         directions.remove('left')
-    elif head_xy[0] is map_width - 1:
+    elif head_xy[0] is len(map) - 1:
         directions.remove('right')
 
     if head_xy[1] is 0:
         directions.remove('up')
-    elif head_xy[1] is map_height - 1:
+    elif head_xy[1] is len(map) - 1:
         directions.remove('down')
 
     for direction in directions:
