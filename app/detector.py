@@ -42,6 +42,7 @@ def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
         else:
             break
     print(x,y)
+    print(index, 1)
 
 
     if 1 <= y < map_height and x < map_width and map[y-1][x] < 2:
@@ -60,6 +61,7 @@ def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
         path = nextmove.shortest_path(map, (x+1,y), tail_xy)
         if path is None:
             index[3][0] -= 2
+    print(index, 2)
 
     if y == 0:
         index[0][0] -= 10000
@@ -70,6 +72,8 @@ def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
     if x + 1 >= map_width:
         index[3][0] -= 10000
     print("x,y is ", (x, y))
+
+    print(index, 3)
 
     if y < map_height and x < map_width and map[y-1][x-1] == 2:
             index[0][0] -= 2
@@ -86,6 +90,8 @@ def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
     if y+1 < map_height and x+1 < map_width and map[y+1][x+1] == 2:
             index[1][0] -= 2
             index[3][0] -= 2
+
+    print(index, 4)
 
     if y < map_height and x < map_width and map[y-1][x] >= 2:
         if map[y-1][x] == 7:
