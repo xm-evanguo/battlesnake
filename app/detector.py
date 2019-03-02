@@ -78,7 +78,10 @@ def findNearFood(foods, map, head_xy, snakes):
     #print(foodDistance)
     #print(foodDistanceSorted)
 
-    bestFood = foodDistanceSorted[0]
+    if len(foodDistanceSorted) > 0:
+        bestFood = foodDistanceSorted[0]
+    else:
+        return None
 
     """
     for distance in foodDistanceSorted:
