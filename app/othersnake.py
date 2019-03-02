@@ -47,16 +47,15 @@ def map_simulation(data, map, my_length, my_id):
 def simu_map(map, my_length, length_list, head_list, tail_list, n_snakes):
     simulation_map = map
     for i in range(n_snakes-1):
+        x = tail_list[i][0]
+        y = tail_list[i][1]
+        if not np.equal(map[y][x], 9):
+            simulation_map[y][x] = 0
         x = head_list[i][0]
         y = head_list[i][1]
         if length_list[i] >= my_length:
             for x2, y2 in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
                 if 0 <= x2 < len(map) and 0 <= y2 < len(map) and map[y2][x2] < 2:
                     simulation_map[y2][x2] = 7
-
-        x = tail_list[i][0]
-        y = tail_list[i][1]
-        if not np.equal(map[y][x], 9):
-            simulation_map[y][x] = 0
 
     return simulation_map
