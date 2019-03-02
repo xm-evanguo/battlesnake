@@ -96,14 +96,16 @@ def move():
     print(simu_map)
 
     snakes_head_list = othersnake.snakes_head(data, simu_map, my_id)
-    nearFood = detector.findNearFood(foods, simu_map, head_xy, snakes_head_list)
-    print("near food is : ", nearFood)
+    path = None
+    if len(foods) > 0:
+        nearFood = detector.findNearFood(foods, simu_map, head_xy, snakes_head_list)
+        print("near food is : ", nearFood)
 
-    for food in nearFood:
-        path = nextmove.shortest_path(simu_map, head_xy, food)
-        if path is not None:
-            break
-    print("path is ", path)
+        for food in nearFood:
+            path = nextmove.shortest_path(simu_map, head_xy, food)
+            if path is not None:
+                break
+        print("path is ", path)
 
     if path is None:
         return detector.bestMove(simu_map, head_xy, map_height, map_width)
