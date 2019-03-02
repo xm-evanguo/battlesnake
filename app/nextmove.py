@@ -1,4 +1,5 @@
 import collections
+import random
 
 def next_move_state(map, head_xy, direction):
     switcher = {
