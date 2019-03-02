@@ -4,7 +4,7 @@ import random
 import bottle
 import numpy as np
 import nextmove
-import help
+import detector
 import othersnake
 
 from api import ping_response, start_response, move_response, end_response
@@ -99,7 +99,7 @@ def move():
     """
 
     snakes = othersnake.snakes_head(data, map)
-    nearFood = help.findNearFood(foods, map, head_xy, snakes)
+    nearFood = detector.findNearFood(foods, map, head_xy, snakes)
     print(nearFood)
 
     path = nextmove.shortest_path(map, head_xy, nearFood)
@@ -108,7 +108,7 @@ def move():
     direction = nextmove.next_direction(map, head_xy, path[1])
     print(direction)
 
-    bestMove = help.bestMove(map, head_xy, direction, map_height, map_width)
+    bestMove = detector.bestMove(map, head_xy, map_height, map_width)
     print(bestMove)
 
     if data["you"]["health"] > 60:
