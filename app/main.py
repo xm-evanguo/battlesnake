@@ -108,15 +108,16 @@ def move():
                 break
         print("path is ", path)
 
+    my_next_tail = othersnake.next_tail(data)
     if path is None:
-        bestMove = detector.bestMove(simu_map, head_xy, map_height, map_width)
+        bestMove = detector.bestMove(simu_map, head_xy, my_next_tail, map_height, map_width)
         print(bestMove)
         return move_response(bestMove)
 
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
     print("direction is ", direction)
 
-    bestMove = detector.bestMove(simu_map, head_xy, map_height, map_width)
+    bestMove = detector.bestMove(simu_map, head_xy, my_next_tail, map_height, map_width)
     print("bestmove is ", bestMove)
 
     #if data["you"]["health"] < 80 or my_length < 10:

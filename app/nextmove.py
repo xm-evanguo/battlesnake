@@ -19,9 +19,11 @@ def next_direction(map, head_xy, move_xy):
     }
     return switcher.get(((move_xy[0] - head_xy[0]), (move_xy[1] - head_xy[1])))
 
-def shortest_path(map, head_xy, goal):
-    queue = collections.deque([[(head_xy[0], head_xy[1])]])
-    seen = set([head_xy])
+def shortest_path(map, starting, goal):
+    queue = collections.deque([[(starting[0], starting[1])]])
+    seen = set([starting])
+    tmp_map = map
+    tmp_map[goal[1]][goal[0]] = 1
     while queue:
         path = queue.popleft()
         x, y = path[-1]

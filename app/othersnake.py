@@ -1,5 +1,14 @@
 import numpy as np
 
+def next_tail(data):
+    cur_body = data["you"]["body"][0]
+    for body in data["you"]["body"][1:]:
+        if body == cur_body:
+            return data["you"]["body"][len(data["you"]["body"]) - 1]
+        else:
+            cur_body = body
+    return data["you"]["body"][len(data["you"]["body"]) - 2]
+
 def snakes_length(data, map, my_id):
     length = []
     for snake in data["board"]["snakes"]:
