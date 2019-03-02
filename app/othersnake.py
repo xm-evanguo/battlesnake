@@ -1,30 +1,33 @@
 import numpy as np
 
-def snakes_length(data, map):
+def snakes_length(data, map, my_id):
     length = []
-    for snakes in data["board"]["snakes"][1:]:
-        length.append(len(snakes["body"]))
+    for snake in data["board"]["snakes"]:
+        if snake["id"] is not my_id:
+            length.append(len(snake["body"]))
     return length
 
-def snakes_head(data, map):
+def snakes_head(data, map, my_id):
     head_list = []
-    for snakes in data["board"]["snakes"][1:]:
-        head_list.append((snakes["body"][0]["x"], snakes["body"][0]["y"]))
+    for snake in data["board"]["snakes"]:
+        if snake["id"] is not my_id:
+            head_list.append((snake["body"][0]["x"], snake["body"][0]["y"]))
     return head_list
 
-def snakes_tail(data, map):
+def snakes_tail(data, map, my_id):
     tail_list = []
-    for snakes in data["board"]["snakes"][1:]:
-        tail_list.append((snakes["body"][len(snakes["body"]) - 1]["x"], snakes["body"][len(snakes["body"]) - 1]["y"]))
+    for snake in data["board"]["snakes"]:
+        if snake["id"] is not my_id:
+            tail_list.append((snake["body"][len(snake["body"]) - 1]["x"], snake["body"][len(snake["body"]) - 1]["y"]))
     return tail_list
 
 def snakes_num(data):
     return len(data["board"]["snakes"])
 
-def map_simulation(data, map, my_length):
-    length_list = snakes_length(data, map)
-    head_list = snakes_head(data, map)
-    tail_list = snakes_tail(data, map)
+def map_simulation(data, map, my_length, my_id):
+    length_list = snakes_length(data, map, my_id)
+    head_list = snakes_head(data, map, my_id)
+    tail_list = snakes_tail(data, map, my_id)
     n_snakes = snakes_num(data)
     return simu_map(map, my_length, length_list, head_list, tail_list, n_snakes)
 
