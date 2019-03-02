@@ -16,29 +16,29 @@ def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
     for i in range(y-1, -1, -1): #check up
         if map[i][x] < 2:
             index[0][0] += 1
-        if map[i][x] == 1:
-            index[0][0] += point
+            if map[i][x] == 1:
+                index[0][0] += point
         else:
             break
     for i in range(y+1, map_height): #check down
         if map[i][x] < 2:
             index[1][0] += 1
-        if map[i][x] == 1:
-            index[1][0] += point
+            if map[i][x] == 1:
+                index[1][0] += point
         else:
             break
     for i in range(x-1, -1, -1): #check left
         if map[y][i] < 2:
             index[2][0] += 1
-        if map[y][i] == 1:
-            index[2][0] += point
+            if map[y][i] == 1:
+                index[2][0] += point
         else:
             break
     for i in range(x+1, map_width): #check right
         if map[y][i] < 2:
             index[3][0] += 1
-        if map[y][i] == 1:
-            index[3][0] += point
+            if map[y][i] == 1:
+                index[3][0] += point
         else:
             break
     print(x,y)
