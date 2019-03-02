@@ -84,8 +84,12 @@ def move():
             map[tail[1]][tail[0]] = 8
 
     for body in data["you"]["body"]:
-        if np.equal(map[body["y"]][body["x"]], 0):
-            map[body["y"]][body["x"]] = 2
+        y = body["y"]
+        x = body["x"]
+        if np.equal(map[y][x], 0):
+            map[y][x] = 2
+            if (x,y) = othersnake.next_tail():
+                break;
 
     if len(data["board"]["snakes"]) > 0:
         for item in data["board"]["snakes"]:
