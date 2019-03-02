@@ -14,22 +14,22 @@ def next_tail(data):
 def snakes_length(data, map, my_id):
     length = []
     for snake in data["board"]["snakes"]:
-        if snake["id"] is not my_id:
+        if snake["id"] != my_id:
             length.append(len(snake["body"]))
     return length
 
 def snakes_head(data, map, my_id):
     head_list = []
     for snake in data["board"]["snakes"]:
-        if snake["id"] is not my_id:
-            print(snake["id"], my_id)
+        if snake["id"] != my_id:
+            #print(snake["id"], my_id)
             head_list.append((snake["body"][0]["x"], snake["body"][0]["y"]))
     return head_list
 
 def snakes_tail(data, map, my_id):
     tail_list = []
     for snake in data["board"]["snakes"]:
-        if snake["id"] is not my_id:
+        if snake["id"] != my_id:
             tail_list.append((snake["body"][len(snake["body"]) - 1]["x"], snake["body"][len(snake["body"]) - 1]["y"]))
     return tail_list
 
