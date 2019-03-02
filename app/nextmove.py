@@ -23,7 +23,7 @@ def shortest_path(map, starting, goal):
     queue = collections.deque([[(starting[0], starting[1])]])
     seen = set([starting])
     tmp_map = map
-    if tmp_map[goal[1]][goal[0]] != 9:
+    if tmp_map[goal[1]][goal[0]] != 7:
         tmp_map[goal[1]][goal[0]] = 1
     while queue:
         path = queue.popleft()

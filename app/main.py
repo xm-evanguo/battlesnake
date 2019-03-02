@@ -58,8 +58,9 @@ def move():
     1 = food
     2 = snake body
     3 = snake head
+    7 = snake possible move
     8 = snake tail
-    9 = snake possible head
+    9 = two snake tail
     '''
 
     map_height = data["board"]["height"]
@@ -77,7 +78,10 @@ def move():
     tail_list = othersnake.snakes_tail(data, map, my_id)
 
     for tail in tail_list:
-        map[tail[1]][tail[0]] = 8
+        if map[tail[1]][tail[0]] == 8:
+            map[tail[1]][tail[0]] = 9
+        else:
+            map[tail[1]][tail[0]] = 8
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):

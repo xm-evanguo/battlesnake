@@ -22,7 +22,6 @@ def snakes_head(data, map, my_id):
     head_list = []
     for snake in data["board"]["snakes"]:
         if snake["id"] != my_id:
-            #print(snake["id"], my_id)
             head_list.append((snake["body"][0]["x"], snake["body"][0]["y"]))
     return head_list
 
@@ -53,11 +52,11 @@ def simu_map(map, my_length, length_list, head_list, tail_list, n_snakes):
         if length_list[i] >= my_length:
             for x2, y2 in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
                 if 0 <= x2 < len(map) and 0 <= y2 < len(map) and map[y2][x2] < 2:
-                    simulation_map[y2][x2] = 9
+                    simulation_map[y2][x2] = 7
 
         x = tail_list[i][0]
         y = tail_list[i][1]
-        if not np.equal(map[y][x], 4):
+        if not np.equal(map[y][x], 9):
             simulation_map[y][x] = 0
 
     return simulation_map
