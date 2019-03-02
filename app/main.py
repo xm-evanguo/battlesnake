@@ -70,7 +70,6 @@ def move():
     map[head_y][head_x] = 3
     head_xy = (head_x, head_y)
     my_length = len(data["you"]["body"])
-    my_id = data["you"]["id"]
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):
