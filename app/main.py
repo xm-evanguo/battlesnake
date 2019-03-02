@@ -58,7 +58,9 @@ def move():
     map = np.zeros((map_height, map_width), dtype = int)
     directions = ['up', 'down', 'left', 'right']
     my_id = data["you"]["id"]
-    print(my_id)
+    my_name = data["you"]["name"]
+    print("my_id: ", my_id)
+    print("my_name: ", my_name)
 
     head_x = data["you"]["body"][0]["x"]
     head_y = data["you"]["body"][0]["y"]
