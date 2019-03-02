@@ -26,21 +26,21 @@ def bestMove(map, head_xy, tail_xy, map_height, map_width):
             index[3][0] += 1
         else:
             break
-
-    if index[y-1][x] < 2:
-        path = shortest_path(map, head_xy, tail_xy)
+    print(x,y)
+    if 1 <= y < map_height and x < map_width and map[y-1][x] < 2:
+        path = nextmove.shortest_path(map, head_xy, tail_xy)
         if len(path) <= 0:
             index[0][0] -= 1
-    if index[y+1][x] < 2:
-        path = shortest_path(map, head_xy, tail_xy)
+    if y+1 < map_height and x < map_width and map[y+1][x] < 2:
+        path = nextmove.shortest_path(map, head_xy, tail_xy)
         if len(path) <= 0:
             index[1][0] -= 1
-    if index[y][x-1] < 2:
-        path = shortest_path(map, head_xy, tail_xy)
+    if y < map_height and 1 <= x < map_width and map[y][x-1] < 2:
+        path = nextmove.shortest_path(map, head_xy, tail_xy)
         if len(path) <= 0:
             index[2][0] -= 1
-    if index[y][x+1] < 2:
-        path = shortest_path(map, head_xy, tail_xy)
+    if y < map_height and x+1 < map_width and map[y][x+1] < 2:
+        path = nextmove.shortest_path(map, head_xy, tail_xy)
         if len(path) <= 0:
             index[3][0] -= 1
 
