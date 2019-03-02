@@ -87,6 +87,7 @@ def move():
         x = body["x"]
         if np.equal(map[y][x], 0):
             map[y][x] = 2
+            print((x,y), othersnake.next_tail(data))
             if (x,y) == othersnake.next_tail(data):
                 break;
 
@@ -106,6 +107,7 @@ def move():
         map[food["y"]][food["x"]] = 1
         foods.append((food["x"], food["y"]))
 
+    print(map)
     simu_map = othersnake.map_simulation(data, map, my_length, my_id)
 
     print(simu_map)
