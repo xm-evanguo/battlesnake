@@ -1,6 +1,6 @@
 import nextmove
 
-def bestMove(map, head_xy, tail_xy, map_height, map_width):
+def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
     # 1.no wall, 2.more space, 3.near food
     index = [[0,'up'],[0,'down'],[0,'left'],[0,'right']]
     x = head_xy[0]
@@ -29,15 +29,17 @@ def bestMove(map, head_xy, tail_xy, map_height, map_width):
     print(x,y)
 
     path = nextmove.shortest_path(map, head_xy, tail_xy)
+    my_length = len(data["you"]["body"])
+
     if path is None:
         if 1 <= y < map_height and x < map_width and map[y-1][x] < 2:
-            index[0][0] -= 1
+            index[0][0] = index[0][0] - (my_length - 2)
         if y+1 < map_height and x < map_width and map[y+1][x] < 2:
-            index[1][0] -= 1
+            index[1][0] = index[1][0] - (my_length - 2)
         if y < map_height and 1 <= x < map_width and map[y][x-1] < 2:
-            index[2][0] -= 1
+            index[2][0] = index[2][0] - (my_length - 2)
         if y < map_height and x+1 < map_width and map[y][x+1] < 2:
-            index[3][0] -= 1
+            index[3][0] = index[3][0] - (my_length - 2)
 
     if y == 0:
         index[0][0] -= 10000
