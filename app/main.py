@@ -70,6 +70,7 @@ def move():
     map[head_y][head_x] = 3
     head_xy = (head_x, head_y)
     my_length = len(data["you"]["body"])
+    my_id = data["you"]["id"]
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):
@@ -91,7 +92,7 @@ def move():
         map[food["y"]][food["x"]] = 1
         foods.append((food["x"], food["y"]))
 
-    simu_map = othersnake.map_simulation(data, map, my_length)
+    simu_map = othersnake.map_simulation(data, map, my_length, my_id)
 
     print(simu_map)
 
@@ -103,10 +104,10 @@ def move():
     print("path is ", path)
 
     if path is None:
-        tmp_int = 0
-        while path is None and tmp_int < len(foods):
-            path = nextmove.shortest_path(simu_map, head_xy, foods[tmp_int])
-            tmp_int += 1
+        for food in foods:
+            path = nextmove.shortest_path(simu_map, head_xy, food)
+            if path is not None:
+                break
 
     if path is None:
         return move_response(nextmove.random_move(simu_map, head_xy))
