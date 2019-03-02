@@ -110,11 +110,11 @@ def move():
                 break
 
     if path is None:
-        return move_response(help.bestMove(simu_map, head_xy, direction, map_height, map_width))
+        return move_response(nextmove.random_move(simu_map, head_xy))
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
     print("direction is ", direction)
 
-    bestMove = help.bestMove(simu_map, head_xy, direction, map_height, map_width)
+    bestMove = help.bestMove(simu_map, head_xy, map_height, map_width)
     print("bestmove is ", bestMove)
 
     if data["you"]["health"] > 80:
