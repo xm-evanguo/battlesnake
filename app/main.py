@@ -53,21 +53,31 @@ def start():
 def move():
     data = bottle.request.json
     #print(json.dumps(data))
+    '''
+    0 = empty
+    1 = food
+    2 = snake body
+    3 = snake head
+    8 = snake tail
+    9 = snake possible head
+    '''
 
     map_height = data["board"]["height"]
     map_width = data["board"]["width"]
     map = np.zeros((map_height, map_width), dtype = int)
     directions = ['up', 'down', 'left', 'right']
     my_id = data["you"]["id"]
-    my_name = data["you"]["name"]
     print("my_id: ", my_id)
-    print("my_name: ", my_name)
 
     head_x = data["you"]["body"][0]["x"]
     head_y = data["you"]["body"][0]["y"]
     map[head_y][head_x] = 3
     head_xy = (head_x, head_y)
     my_length = len(data["you"]["body"])
+    tail_list = othersnake.snakes_tail(data, map, my_id)
+
+    for tail in tail_list:
+        map[tail[1]][tail[0]] = 8
 
     for body in data["you"]["body"]:
         if np.equal(map[body["y"]][body["x"]], 0):
@@ -122,7 +132,7 @@ def move():
     print("bestmove is ", bestMove)
 
     #if data["you"]["health"] < 80 or my_length < 10:
-    if my_length < 10 or data["you"]["health"] < 30:
+    if my_length < 15 or data["you"]["health"] < 40:
         if direction is not None:
             return move_response(direction)
 
