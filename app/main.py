@@ -104,16 +104,19 @@ def move():
 
     if path is None:
         tmp_int = 0
-        while path is None:
+        while path is None and tmp_int < len(foods):
             path = nextmove.shortest_path(simu_map, head_xy, foods[tmp_int])
             tmp_int += 1
+
+    if path is None:
+        return move_response(nextmove.random_move(simu_map, head_xy))
     direction = nextmove.next_direction(simu_map, head_xy, path[1])
     print("direction is ", direction)
 
     bestMove = help.bestMove(simu_map, head_xy, direction, map_height, map_width)
     print("bestmove is ", bestMove)
 
-    if data["you"]["health"] > 60:
+    if data["you"]["health"] > 80:
         return move_response(bestMove)
     else:
         return move_response(direction)
