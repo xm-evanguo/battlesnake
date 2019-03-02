@@ -32,7 +32,7 @@ def snakes_tail(data, map, my_id):
         if snake["id"] != my_id:
             x = snake["body"][len(snake["body"]) - 1]["x"]
             y = snake["body"][len(snake["body"]) - 1]["y"]
-            tail_list.append(x, y))
+            tail_list.append((x, y))
     return tail_list
 
 def snakes_num(data):
