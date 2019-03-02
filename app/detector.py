@@ -25,38 +25,38 @@ def bestMove(map, head_xy, map_height, map_width):
         else:
             break
 
-    if y < map_height and x < map_width and map[y-1][x-1] >= 2:
-        if map[y-1][x-1] == 3:
-            index[0][0] /= 2
-            index[2][0] /= 2
-        else:
+    if y < map_height and x < map_width and map[y-1][x-1] == 2:
+        #if map[y-1][x-1] == 3:
+            #index[0][0] /= 2
+            #index[2][0] /= 2
+        #else:
             index[0][0] -= 2
             index[2][0] -= 2
 
-    if y < map_height and x+1 < map_width and map[y-1][x+1] >= 2:
-        if map[y-1][x+1] == 3:
-            index[0][0] /= 2
-            index[3][0] /= 2
-        else:
+    if y < map_height and x+1 < map_width and map[y-1][x+1] == 2:
+        #if map[y-1][x+1] == 3:
+            #index[0][0] /= 2
+            #index[3][0] /= 2
+        #else:
             index[0][0] -= 2
             index[3][0] -= 2
 
-    if y+1 < map_height and x < map_width and map[y+1][x-1] >= 2:
-        if map[y+1][x-1] == 3:
-            index[1][0] /= 2
-            index[2][0] /= 2
-        else:
+    if y+1 < map_height and x < map_width and map[y+1][x-1] == 2:
+        #if map[y+1][x-1] == 3:
+            #index[1][0] /= 2
+            #index[2][0] /= 2
+        #else:
             index[1][0] -= 2
             index[2][0] -= 2
 
-    if y+1 < map_height and x+1 < map_width and map[y+1][x+1] >= 2:
-        if map[y+1][x+1] == 3:
-            index[1][0] /= 2
-            index[3][0] /= 2
-        else:
+    if y+1 < map_height and x+1 < map_width and map[y+1][x+1] == 2:
+        #if map[y+1][x+1] == 3:
+            #index[1][0] /= 2
+            #index[3][0] /= 2
+        #else:
             index[1][0] -= 2
             index[3][0] -= 2
-
+    print(index)
     return max(index)[1]
 
 
