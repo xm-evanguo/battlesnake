@@ -62,5 +62,4 @@ def simu_map(map, my_length, length_list, head_list, tail_list, n_snakes):
                 simulation_map[y][0] = 7
             elif y == 1:
                 simulation_map[0][x] = 7
-            elif 
     return simulation_map
