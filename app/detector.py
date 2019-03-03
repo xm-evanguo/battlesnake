@@ -8,11 +8,9 @@ def bestMove(data, map, head_xy, tail_xy, map_height, map_width):
     y = head_xy[1]
     point = 0
     if my_length < 10 or data['you']['health'] < 40:
-        point = 5
+        point = 10
     if my_length >= 10 or data['you']['health'] < 60:
-        point = 2
-
-
+        point = 5
 
     for i in range(y-1, -1, -1): #check up
         if map[i][x] < 2:

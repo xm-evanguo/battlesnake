@@ -140,7 +140,7 @@ def move():
     bestMove = detector.bestMove(data, simu_map, head_xy, my_next_tail, map_height, map_width)
     print("bestmove is ", bestMove)
 
-    if my_length < 8 or data["you"]["health"] < 10:
+    if my_length < 8 or data["you"]["health"] < 20:
         if direction is not None:
             print("return direction")
             return move_response(direction)

@@ -57,5 +57,10 @@ def simu_map(map, my_length, length_list, head_list, tail_list, n_snakes):
             for x2, y2 in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
                 if 0 <= x2 < len(map) and 0 <= y2 < len(map) and map[y2][x2] < 2:
                     simulation_map[y2][x2] = 7
-
+        else:
+            if x == 1:
+                simulation_map[y][0] = 7
+            elif y == 1:
+                simulation_map[0][x] = 7
+            elif 
     return simulation_map
